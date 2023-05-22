@@ -20,39 +20,62 @@ char* charToMorse(char currentChar){
       }
     }
   }
-  return NULL;
+  return " ";
 }
 
 //turn all text into morse codes
 
 int main(int argc, char *argv[]) {
-    //printf("\a\a\a");
     if (argc == 1){
       printf("Please give something\n");
       return 1;
     }
 
-    // Copy strings into our array
-    int max_strings = argc-1;
-    int string_lenght = 15;
-    char strings[max_strings][string_lenght];
-    for (int j = 1; j < argc; j++){
-      strcpy(strings[j-1], argv[j]);
-    }
-
-    // List and print all strings
-    for (int i = 0; i < (argc-1); i++) {
-        if (strlen(strings[i]) != 1) {
-          for (int j = 0; j < strlen(strings[i]); j++) {
-            printf("%s\n",charToMorse(strings[i][j]));
+    //read from file
+    if (strcmp(argv[1],"--file") == 0 && argc > 2){
+      char filename[20];
+      strcpy(filename,argv[2]);
+      FILE* file = fopen(filename, "r");
+      if (file == NULL) {
+          printf("Unable to open file: %s\n", filename);
+          return 1;
+      }
+      int ch;
+      while ((ch = fgetc(file)) != EOF) {
+          puts(charToMorse(ch));
+          //putchar('t');
+      }
+      printf("\n");
+      fclose(file);
+      return 0;
+    }//read from terminal
+    else if (strcmp(argv[1],"--text") == 0 && argc > 2){
+      int max_strings = argc-2;
+      int string_lenght = 15;
+      char strings[max_strings][string_lenght];
+      for (int j = 2; j < argc; j++){
+        strcpy(strings[j-2], argv[j]);
+      }
+      // List and print all strings
+      for (int i = 0; i < (argc-2); i++) {
+          if (strlen(strings[i]) != 1) {
+            for (int j = 0; j < strlen(strings[i]); j++) {
+              puts(charToMorse(strings[i][j]));
+            }
+          } 
+          else {
+              puts(charToMorse(*strings[i]));        
           }
-        } 
-        else {
-            printf("%s\n", charToMorse(*strings[i]));          
-        }
+          printf("\n");
+      }
+      return 0;
     }
+    
+    
+    
+    
 
-    return 0;
+    
 
   
 
