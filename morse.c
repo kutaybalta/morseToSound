@@ -26,10 +26,10 @@ char* charToMorse(char currentChar){
 void playSound(char* morse) {
   for (int i = 0; i < strlen(morse); i++){
     if (morse[i] == '.'){
-      system("aplay dottest.wav");
+      system("aplay -q dottest.wav");
     }
     else if (morse[i] == '-'){
-      system("aplay linetest.wav");
+      system("aplay -q linetest.wav");
     }
   }
 }
