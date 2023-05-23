@@ -23,6 +23,17 @@ char* charToMorse(char currentChar){
   return " ";
 }
 
+void playSound(char* morse) {
+  for (int i = 0; i < strlen(morse); i++){
+    if (morse[i] == '.'){
+      system("aplay dottest.wav");
+    }
+    else if (morse[i] == '-'){
+      system("aplay linetest.wav");
+    }
+  }
+}
+
 //turn all text into morse codes
 
 int main(int argc, char *argv[]) {
@@ -43,7 +54,7 @@ int main(int argc, char *argv[]) {
       int ch;
       while ((ch = fgetc(file)) != EOF) {
           puts(charToMorse(ch));
-          //putchar('t');
+          playSound(charToMorse(ch));
       }
       printf("\n");
       fclose(file);
@@ -61,10 +72,12 @@ int main(int argc, char *argv[]) {
           if (strlen(strings[i]) != 1) {
             for (int j = 0; j < strlen(strings[i]); j++) {
               puts(charToMorse(strings[i][j]));
+              playSound(charToMorse(strings[i][j]));
             }
           } 
           else {
-              puts(charToMorse(*strings[i]));        
+              puts(charToMorse(*strings[i]));
+              playSound(charToMorse(*strings[i]));        
           }
           printf("\n");
       }
