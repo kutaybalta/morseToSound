@@ -40,6 +40,11 @@ int main(int argc, char *argv[]) {
     if (argc == 1){
       printf("Please give something\n");
       return 1;
+    }else if (strcmp(argv[1],"--help") == 0){
+      printf("\n\n");
+      printf("  --text <text input> : \tTurns the parameter you give to a morse code");
+      printf("\n  --file <file.txt> : \t\tReads from the given filename\n");
+      printf("\n\n\n");
     }
 
     //read from file
