@@ -5,3 +5,5 @@ clean :
 	rm morse
 	clear
 
+check :
+	which aplay
