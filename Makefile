@@ -1,9 +1,14 @@
 morse : morse.c
-	gcc -o morse morse.c
+	@gcc -o morse morse.c
 
 clean : 
 	rm morse
 	clear
 
 check :
-	which aplay
+	@if command -v aplay >/dev/null; then\
+		echo "Aplay found"; \
+	else \
+		echo "Aplay cannot be found and installation will start"; \
+		sudo apt-get install -y alsa-utils; \
+	fi
