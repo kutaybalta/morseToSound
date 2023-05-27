@@ -1,5 +1,6 @@
-morse : morse.c
+morse : check morse.c
 	@gcc -o morse morse.c
+	@echo "morse has compiled"
 
 clean : 
 	rm morse
